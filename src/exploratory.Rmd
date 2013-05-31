@@ -76,3 +76,31 @@ for(i in 423:431) {
 }
 svymean(data[432], design = nsch.design, na.rm = T)
 ```
+
+Medical Home
+----
+```{r}
+svymean(~pdn_11, nsch.design, na.rm = T)
+svymean(~famcent_11, nsch.design, na.rm = T)
+svymean(~norefprb_11, nsch.design, na.rm = T)
+svymean(~usual_11, nsch.design, na.rm = T)
+svymean(~carecoor_11, nsch.design, na.rm = T)
+svymean(~mh_comp, nsch.design, na.rm = T)
+```
+
+Dental care
+----
+One hypothesis might be that kids with ADHD and autism (or any special health care need) see dentists less often. There are several dental variables including preventive care, unmet need, and any dental care.  
+
+```{r}
+for(i in 133:135) {
+  dentalnames <- c("Saw dentist for any reason in past 12 mos", "Number of preventive dental visits in past 12 mos", "Had a toothache, decayed teeth or unfilled cavity in past 12 mos")
+  print(dentalnames[i-132])
+  print(svymean(data[i], nsch.design, na.rm = T))
+}
+```
+
+Delayed or not received dental visits
+```{r}
+svymean(~K4Q28X02, nsch.design, na.rm = T)
+```
