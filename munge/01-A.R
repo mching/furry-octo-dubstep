@@ -39,6 +39,12 @@ selectedrows[is.na(selectedrows)] <- F
 # Copy into the service.months variable the # of months in the original service start age variable
 service.months[selectedrows] <- data$K4Q37[selectedrows] 
 
+# Need to deal with the ones where K4Q37 == 96 or 97. For now we'll make them 9999.
+str(data$K4Q37)
+service.months[data$K4Q37 == 96 | data$K4Q37 == 97] <- 9999
+
+# Attach service.months
+data$service.start.months <- service.months
      
 ##################################
 # Specify survey design to include all cleaned variables
