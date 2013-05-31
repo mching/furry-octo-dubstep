@@ -27,6 +27,18 @@ svymean(~sex_11, nsch.design, na.rm = T)
 svytotal(~sex_11, nsch.design, na.rm = T)
 ```
 
+Age
+----
+
+Race
+------
+
+Ethnicity
+----
+
+Poverty
+-----
+
 PEDS variables
 ----
 ```{r}
@@ -103,4 +115,25 @@ for(i in 133:135) {
 Delayed or not received dental visits
 ```{r}
 svymean(~K4Q28X02, nsch.design, na.rm = T)
+```
+
+Services received for developmental needs
+------
+### Receipt of services  
+Child received EI/OT/ST/Behavior Tx services for developmental issues. We also need to figure out whether the child actually was eligible for these issues (using PEDS?)
+```{r}
+str(data$K4Q36)
+levels(data$K4Q36)
+summary(data$K4Q36)
+```
+
+### Age of services started  
+It looks like age was asked by month until the child was 2 years old. I'll need to recode the year kids into months. Done in munge script 01-A.R.
+```{r}
+str(data$K4Q37)
+levels(data$K4Q37)
+summary(data$K4Q37)
+
+str(data$K4Q37_A)
+levels(data$K4Q37_A)
 ```
