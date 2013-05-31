@@ -2,6 +2,7 @@ Exploratory analysis page
 ========================================================
 
 Library and load data
+---
 ```{r}
 library(survey)
 library(ProjectTemplate)
@@ -11,12 +12,14 @@ load.project()
 ```
 
 Specify survey design
+---
 ```{r}
 nsch.design <- svydesign(id=~IDNUMR, strata = ~STATE + SAMPLE, data = data, weights = ~NSCHWT)
 nsch.design
 ```
 
 Sex
+----
 ```{r}
 summary(data$sex_11)
 prop.table(table(data$sex_11))
@@ -25,6 +28,7 @@ svytotal(~sex_11, nsch.design, na.rm = T)
 ```
 
 PEDS variables
+----
 ```{r}
 summary(data$peds)
 svymean(~peds, nsch.design, na.rm = T)
@@ -32,6 +36,7 @@ svytotal(~peds, nsch.design, na.rm = T)
 ```
 
 Flourishing items 0-5
+----
 ```{r}
 summary(data[469:472])
 summary(data$ind2_3_11)
@@ -42,6 +47,7 @@ svytotal(~ind2_3_11, nsch.design, na.rm = T)
 
 
 Flourishing items 6-17 yo
+----
 ```{r}
 summary(data[475:477])
 summary(data$ind2_4_11)
@@ -51,6 +57,7 @@ svytotal(~ind2_4_11, nsch.design, na.rm = T)
 ```
 
 Chronic health or developmental conditions and severity
+----
 ```{r}
 for(i in 414:420) {
   print(names(data)[i])
