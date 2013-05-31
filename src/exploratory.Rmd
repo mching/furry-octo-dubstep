@@ -16,7 +16,7 @@ nsch.design <- svydesign(id=~IDNUMR, strata = ~STATE + SAMPLE, data = data, weig
 nsch.design
 ```
 
-Male
+Sex
 ```{r}
 summary(data$sex_11)
 prop.table(table(data$sex_11))
@@ -48,4 +48,24 @@ summary(data$ind2_4_11)
 
 svymean(~ind2_4_11, nsch.design, na.rm = T)
 svytotal(~ind2_4_11, nsch.design, na.rm = T)
+```
+
+Chronic health or developmental conditions and severity
+```{r}
+for(i in 414:420) {
+  print(names(data)[i])
+  print(svymean(data[i], na.rm = T, design = nsch.design))
+  print(svymean(data[i + 20], na.rm = T, design = nsch.design))
+  }
+for(i in 421:422) {
+  print(names(data)[i])
+  print(svymean(data[i], na.rm = T, design = nsch.design))
+  print(svymean(data[i + 29], na.rm = T, design = nsch.design))
+}
+for(i in 423:431) {
+  print(names(data)[i])
+  print(svymean(data[i], na.rm = T, design = nsch.design))
+  print(svymean(data[i + 18], na.rm = T, design = nsch.design))
+}
+svymean(data[432], design = nsch.design, na.rm = T)
 ```
