@@ -1,7 +1,9 @@
-# Source this to load the project
+# Source this to load the project and needed libraries
 
 rm(list = ls())
 library('ProjectTemplate')
+library(survey)
+
 load.project()
 
 # Commented out to not show the head of the dataset
