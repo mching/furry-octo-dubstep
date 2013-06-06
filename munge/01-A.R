@@ -11,6 +11,22 @@ rm(DRC.2011.2012.NSCH)
 ##################################
 
 ##################################
+# Age of autism diagnosis
+# K2Q35A_1 and K2Q35A_2
+# Make new variable in months
+##################################
+
+ASD.dx.mos <- rep(NA, 95677)
+selectedrows <- rep(NA, 95677)
+str(data$K2Q35A_2)
+ASD.dx.mos[which(as.integer(data$K2Q35A_2) == 2)] <- data$AGEYR_CHILD[which(as.integer(data$K2Q35A_2) == 2)] * 12
+ASD.dx.mos[which(as.integer(data$K2Q35A_2) == 1)] <- data$AGEYR_CHILD[which(as.integer(data$K2Q35A_2) == 1)]
+str(data$K2Q35A_1)
+summary(data$K2Q35A_1)
+table(data$K2Q35A_1) # We have some 30 Refused and 7 Don't Know. We can impute, possibly by median. 
+table(ASD.dx.mos)
+hist(ASD.dx.mos)
+##################################
 # How old is the child at the start of services in months?
 # K4Q37, K4Q37_A -> service.months
 ##################################
