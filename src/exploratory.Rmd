@@ -29,16 +29,51 @@ svytotal(~sex_11, nsch.design, na.rm = T)
 
 Age
 ----
+Age is not provided in month intervals, only in years. This makes it more difficult to interpret the youngest age children, but we can create some 6 month interval categories for children under 2 with the data available. I did this in the munge file.
+```{r}
+summary(data$AGEYR_CHILD)
+svytable(~AGEYR_CHILD, nsch.design)
+plot(svytable(~AGEYR_CHILD, nsch.design))
+```
 
+Toddler age groups are 0-5, 6-11, 12-17 and 18-23 months.
+
+```{r}
+summary(data$toddler.age)
+svytable(~toddler.age, nsch.design)
+```
 
 Race
 ------
+Race is classified differently across all states and in Hawaii.
+```{r}
+summary(data$RACER)
+svytotal(~RACER, nsch.design, na.rm = T)
+svytotal(~RACE_HI, nsch.design, na.rm = T)
+```
 
 Ethnicity
 ----
+```{r}
+summary(data$HISPANIC)
+svytotal(~HISPANIC, nsch.design, na.rm = T)
+svytable(~HISPANIC + RACER, nsch.design)
+```
 
 Poverty
 -----
+```{r}
+summary(data$povlev4_11)
+svytotal(~povlev4_11, nsch.design)
+```
+
+Maternal education level
+-----
+```{r}
+summary(data$EDUC_MOMR)
+
+```
+
 
 Birthweight
 ----
@@ -151,3 +186,5 @@ summary(data$K4Q37)
 str(data$K4Q37_A)
 levels(data$K4Q37_A)
 ```
+
+# Age of autism or developmental delay diagnosis
