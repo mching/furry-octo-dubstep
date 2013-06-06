@@ -63,11 +63,13 @@ rm(BWgrams)
 ##################################
 # Create 6 month age variables under 2
 ##################################
+
 # summary(data$AGEYR_CHILD)
 # summary(data$FLG_06_MNTH) # 2319 children are under 6 months
 # xtabs(~AGEYR_CHILD + FLG_06_MNTH, data) # 2803 are 6-12 months
 # xtabs(~AGEYR_CHILD + FLG_18_MNTH, data) # 2936 are 12-18 mos, 1982 are 18-24 mos
 # Create new toddler.age variable
+
 toddler.age <- rep(NA, 95677)
 
 # Under 6 mos is the FLG_06_MNTH variable
@@ -85,7 +87,9 @@ toddler.age[as.integer(data$FLG_18_MNTH) == 1 & data$AGEYR_CHILD == 1] <- 4
 toddler.age <- ordered(toddler.age, levels = 1:4, labels = c("0-5 mos", "6-11 mos", "12-17 mos", "18-23 mos"))
 # table(toddler.age, useNA = "ifany")
 
-
+# Attach toddler.age to the dataframe
+data$toddler.age <- toddler.age
+rm(toddler.age)
 
 ##################################
 # Specify survey design to include all cleaned variables
