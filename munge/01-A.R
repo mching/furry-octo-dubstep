@@ -18,14 +18,15 @@ rm(DRC.2011.2012.NSCH)
 
 ASD.dx.mos <- rep(NA, 95677)
 selectedrows <- rep(NA, 95677)
-str(data$K2Q35A_2)
+# str(data$K2Q35A_2)
 ASD.dx.mos[which(as.integer(data$K2Q35A_2) == 2)] <- data$AGEYR_CHILD[which(as.integer(data$K2Q35A_2) == 2)] * 12
 ASD.dx.mos[which(as.integer(data$K2Q35A_2) == 1)] <- data$AGEYR_CHILD[which(as.integer(data$K2Q35A_2) == 1)]
-str(data$K2Q35A_1)
-summary(data$K2Q35A_1)
-table(data$K2Q35A_1) # We have some 30 Refused and 7 Don't Know. We can impute, possibly by median. 
-table(ASD.dx.mos)
-hist(ASD.dx.mos)
+# str(data$K2Q35A_1)
+# summary(data$K2Q35A_1)
+# table(data$K2Q35A_1) # We have some 30 Refused and 7 Don't Know. We can impute, possibly by median. 
+# table(ASD.dx.mos)
+# hist(ASD.dx.mos)
+
 ##################################
 # How old is the child at the start of services in months?
 # K4Q37, K4Q37_A -> service.months
@@ -41,11 +42,11 @@ selectedrows[is.na(selectedrows)] <- F
 
 # Make the service.months variable 12 months times the # of years in the service start age
 service.months[selectedrows] <- data$K4Q37[selectedrows] * 12 
-summary(data$K4Q37_A == "2 - YEARS")
+# summary(data$K4Q37_A == "2 - YEARS")
 
 # Now select just the rows that are months
 # Set selectedrows variable to TRUE if the units are months (level 1 in this variable)
-levels(data$K4Q37_A)
+# levels(data$K4Q37_A)
 selectedrows <- rep(NA, 95677)
 selectedrows <- as.integer(data$K4Q37_A) == 1
 
@@ -56,7 +57,7 @@ selectedrows[is.na(selectedrows)] <- F
 service.months[selectedrows] <- data$K4Q37[selectedrows] 
 
 # Need to deal with the ones where K4Q37 == 96 or 97. For now we'll make them 9999.
-str(data$K4Q37)
+# str(data$K4Q37)
 service.months[data$K4Q37 == 96 | data$K4Q37 == 97] <- 9999
 
 # Attach service.months
@@ -68,8 +69,8 @@ data$service.start.months <- service.months
 # 47 ounces was the minimum and 163 ounces was the maximum recorded
 # if lower or higher, they were made into 47 or 163
 ##################################
-summary(data$K2Q04R==47)
-summary(data$K2Q04R==163)
+# summary(data$K2Q04R==47)
+# summary(data$K2Q04R==163)
 BWgrams <- rep(NA, 95677)
 BWgrams <- data$K2Q04R*30
 # summary(BWgrams)
