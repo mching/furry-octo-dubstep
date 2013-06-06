@@ -71,7 +71,7 @@ Maternal education level
 -----
 ```{r}
 summary(data$EDUC_MOMR)
-
+svytable(~EDUC_MOMR, design = nsch.design)
 ```
 
 
@@ -188,3 +188,12 @@ levels(data$K4Q37_A)
 ```
 
 # Age of autism or developmental delay diagnosis
+```{r}
+str(data$K2Q35A_1)
+summary(data$K2Q35A_1)
+table(data$K2Q35A_1) # We have some 30 Refused and 7 Don't Know. We can impute, possibly by median.
+
+summary(data$K2Q35A_2)
+str(data$K2Q35A_2)
+
+```
