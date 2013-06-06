@@ -46,6 +46,21 @@ service.months[data$K4Q37 == 96 | data$K4Q37 == 97] <- 9999
 # Attach service.months
 data$service.start.months <- service.months
      
+
+##################################
+# change birthweight into grams
+# 47 ounces was the minimum and 163 ounces was the maximum recorded
+# if lower or higher, they were made into 47 or 163
+##################################
+summary(data$K2Q04R==47)
+summary(data$K2Q04R==163)
+BWgrams <- rep(NA, 95677)
+BWgrams <- data$K2Q04R*30
+# summary(BWgrams)
+data$BWgrams <- BWgrams
+rm(BWgrams)
+
+
 ##################################
 # Specify survey design to include all cleaned variables
 ##################################

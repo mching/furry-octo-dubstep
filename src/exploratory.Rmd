@@ -30,6 +30,7 @@ svytotal(~sex_11, nsch.design, na.rm = T)
 Age
 ----
 
+
 Race
 ------
 
@@ -38,6 +39,19 @@ Ethnicity
 
 Poverty
 -----
+
+Birthweight
+----
+```{r}
+str(data$K2Q04R)
+summary(data$K2Q04R)
+# needs to be changed into grams for easier interpretation
+# done in munge file 01-A.R
+svymean(~BWgrams, nsch.design, na.rm = T)
+svyquantile(~BWgrams, nsch.design, seq(0, 1, by = 0.25), na.rm = T)
+svyhist(~BWgrams, nsch.design, xlab = "Birthweight (g)", ylab = "Frequency", main = "NSCH 2011-2012 Birthweight")
+```
+
 
 PEDS variables
 ----
