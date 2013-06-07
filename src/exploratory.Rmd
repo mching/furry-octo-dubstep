@@ -25,6 +25,7 @@ summary(data$sex_11)
 prop.table(table(data$sex_11))
 svymean(~sex_11, nsch.design, na.rm = T)
 svytotal(~sex_11, nsch.design, na.rm = T)
+barplot(svytotal(~sex_11, nsch.design, na.rm = T))
 ```
 
 Age
@@ -33,7 +34,7 @@ Age is not provided in month intervals, only in years. This makes it more diffic
 ```{r}
 summary(data$AGEYR_CHILD)
 svytable(~AGEYR_CHILD, nsch.design)
-plot(svytable(~AGEYR_CHILD, nsch.design))
+barplot(svytable(~AGEYR_CHILD, nsch.design))
 ```
 
 Toddler age groups are 0-5, 6-11, 12-17 and 18-23 months.
@@ -41,6 +42,7 @@ Toddler age groups are 0-5, 6-11, 12-17 and 18-23 months.
 ```{r}
 summary(data$toddler.age)
 svytable(~toddler.age, nsch.design)
+barplot(svytable(~toddler.age, nsch.design))
 ```
 
 Race
@@ -49,7 +51,9 @@ Race is classified differently across all states and in Hawaii.
 ```{r}
 summary(data$RACER)
 svytotal(~RACER, nsch.design, na.rm = T)
+barplot(svytotal(~RACER, nsch.design, na.rm = T))
 svytotal(~RACE_HI, nsch.design, na.rm = T)
+barplot(svytotal(~RACE_HI, nsch.design, na.rm = T))
 ```
 
 Ethnicity
@@ -58,6 +62,7 @@ Ethnicity
 summary(data$HISPANIC)
 svytotal(~HISPANIC, nsch.design, na.rm = T)
 svytable(~HISPANIC + RACER, nsch.design)
+barplot(svytable(~HISPANIC + RACER, nsch.design))
 ```
 
 Poverty
@@ -65,6 +70,7 @@ Poverty
 ```{r}
 summary(data$povlev4_11)
 svytotal(~povlev4_11, nsch.design)
+barplot(svytotal(~povlev4_11, nsch.design))
 ```
 
 Maternal education level
@@ -72,6 +78,7 @@ Maternal education level
 ```{r}
 summary(data$EDUC_MOMR)
 svytable(~EDUC_MOMR, design = nsch.design)
+barplot(svytable(~EDUC_MOMR, design = nsch.design))
 ```
 
 
@@ -206,5 +213,6 @@ svytotal(~ind1_1_11, nsch.design, na.rm = T)
 overall.health <- svymean(~ind1_1_11, nsch.design, na.rm = T)
 overall.health
 confint(overall.health)
+barplot(overall.health)
 ```
 ### Success! The result is the same!
