@@ -203,6 +203,15 @@ str(data$K2Q35A_2)
 
 ```
 
+Developmental Screening
+----
+Does the respondent recall having received developmental screening K6Q12?
+```{r}
+svytotal(~screened, nsch.design, na.rm = T)
+svymean(~screened, nsch.design, na.rm = T)
+```
+
+
 Indicator 1.1: In general how would you describe [child name]'s health?
 ----
 I am using this indicator to test the survey design statement. If it works properly, we should have the same result as given on http://childhealthdata.org/browse/survey/results?q=2456&r=1
