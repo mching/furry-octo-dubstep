@@ -23,13 +23,22 @@ I compared the mean age of service initiation among children who received develo
 
 Results
 ----
+### Initial load of packages and dataset
+```{r}
+library(survey)
+library(ProjectTemplate)
+setwd('~/Dropbox/Mike/NSCH_11_12/')
+rm(list = ls())
+load.project()
+```
+
 ### Predictor
 Does the respondent recall having received developmental screening K6Q12?
 ```{r}
 svytotal(~screened, nsch.design, na.rm = T)
 svymean(~screened, nsch.design, na.rm = T)
 ```
-39% of children were screened.
+About 39% of children were screened.
 
 ### Outcome
 We calculate the mean age of receipt of services.
@@ -53,9 +62,9 @@ par(mfrow = c(1, 2))
 svyby(~service.start.months, ~screened, svyhist, design = nsch.design)
 par(mfrow = c(1,1))
 ```
-This looks pretty close!  
+The mean age services started in children who were screened was 22.7 months versus 22.9 months in children who were not screened. This looks pretty close!  
 
-Run t-test to see if there is a statistically significant difference.
+We ran a t-test to see if there was a statistically significant difference.
 ```{r}
 svyttest(service.start.months~screened, nsch.design)
 ```
