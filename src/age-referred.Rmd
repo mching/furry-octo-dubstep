@@ -1,0 +1,70 @@
+Does receipt of formal developmental screening lead to earlier receipt of services for developmental problems?
+==========
+
+Introduction
+------
+Developmental screening is recommended but does it lead to earlier receipt of services?  
+
+Methods
+------
+This was a cross sectional study using the NSCH 2011-2012 public use data file.
+
+### Inclusion Criteria
+Children were included in the analysis if they had been referred for developmental services including Early Intervention, speech therapy, occupational therapy, etc.
+
+### Predictor  
+The predictor was whether a parent recalled having been administered a formal developmental screening tool.
+
+### Outcome
+The main outcome was the age that a child had begun receiving developmental services.
+
+### Analysis
+I compared the mean age of service initiation among children who received developmental screening versus children who had not received this screening. Comparison was made using a two sample t-test. I used the R statistical software package.
+
+Results
+----
+### Predictor
+Does the respondent recall having received developmental screening K6Q12?
+```{r}
+svytotal(~screened, nsch.design, na.rm = T)
+svymean(~screened, nsch.design, na.rm = T)
+```
+39% of children were screened.
+
+### Outcome
+We calculate the mean age of receipt of services.
+```{r}
+# For now, since there are 27 missing values, we'll just make them NA
+data$service.start.months[data$service.start.months==9999] <- NA 
+
+# Need to make the survey design object again since we changed the data
+nsch.design <- svydesign(id=~IDNUMR, strata = ~STATE + SAMPLE, data = data, weights = ~NSCHWT)
+
+svymean(~service.start.months, nsch.design, na.rm = T)
+svyhist(~service.start.months, nsch.design)
+```
+The mean age of receipt of services was 42.5 months with a standard error of 0.93 months.  
+
+Then we calculate by receipt of developmental screening
+```{r}
+bys <- svyby(~service.start.months, ~screened, svymean, na.rm = T, design = nsch.design)
+print(bys, digits = 4)
+par(mfrow = c(1, 2))
+svyby(~service.start.months, ~screened, svyhist, design = nsch.design)
+par(mfrow = c(1,1))
+```
+This looks pretty close!  
+
+Run t-test to see if there is a statistically significant difference.
+```{r}
+svyttest(service.start.months~screened, nsch.design)
+```
+The difference was not significant at a p value cutoff of 0.05.
+
+Discussion
+----
+I didn't find a statistically (or clinically) significant difference in the age at which services started depending on developmental screening. One possibility is that children who are referred may have obvious differences. Another possibility is that the parents who have been receiving services do not recall well whether they were screened or not.  
+
+A future study might examine the rates of referral between screened and not-screened groups.
+
+
