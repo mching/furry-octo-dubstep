@@ -59,6 +59,7 @@ service.months[selectedrows] <- data$K4Q37[selectedrows]
 # Need to deal with the ones where K4Q37 == 96 or 97. For now we'll make them 9999.
 # str(data$K4Q37)
 service.months[data$K4Q37 == 96 | data$K4Q37 == 97] <- 9999
+table(service.months[service.months == 9999])
 
 # Attach service.months
 data$service.start.months <- service.months
@@ -107,6 +108,18 @@ toddler.age <- ordered(toddler.age, levels = 1:4, labels = c("0-5 mos", "6-11 mo
 # Attach toddler.age to the dataframe
 data$toddler.age <- toddler.age
 rm(toddler.age)
+
+##################################
+# Receipt of developmental screening
+##################################
+# Includes DK and Refused. Instead of imputing, for now, let's just make them NAs and see what happens
+# summary(data$K6Q12)
+screened <- data$K6Q12
+screened[as.integer(screened) > 2] <- NA # Make don't know and refused categories into NAs
+# summary(screened)
+screened <- factor(screened) # Get rid of don't know or refused categories
+# summary(screened)
+data$screened <- screened
 
 ##################################
 # Specify survey design to include all cleaned variables
