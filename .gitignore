@@ -6,6 +6,5 @@ logs
 data
 graphs
 doc
-*.md
 *.html
 src/figure/
